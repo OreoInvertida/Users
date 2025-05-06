@@ -1,7 +1,7 @@
 # users/main.py
 
 from fastapi import FastAPI
-from routers.create_user import router as create_user_router
+from routers.user_crud import router as create_user_router
 from database.mongodb import connect_to_mongo
 
 app = FastAPI(title="Users Microservice")

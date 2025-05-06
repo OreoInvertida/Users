@@ -6,7 +6,12 @@ class UserCreate(BaseModel):
     name: str
     email: str
     address: str
-    password: str
+
+
+class UserUpdate(BaseModel):
+    name: str | None = None
+    email: str | None = None
+    address: str | None = None
 
 class UserInDB(UserCreate):
     _id: str | None = None
