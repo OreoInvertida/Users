@@ -61,8 +61,8 @@ async def create_user_and_notify(user_data: UserCreate):
                 "operatorName": OPERATOR_NAME
             }
 
-            response = await client.post(EXTERNAL_REGISTER_URL, json=payload_clean, headers=headers)
-
+            response = await client.post(f"{EXTERNAL_REGISTER_URL}/registerCitizen/", json=payload_clean, headers=headers)
+            
             logger.info(f"← Respuesta API externa: {response.status_code} - {response.text}")
 
             if response.status_code != 201:
@@ -78,7 +78,7 @@ async def create_user_and_notify(user_data: UserCreate):
         # Notificar por correo al usuario
         try:
             logger.info(f"→ Enviando correo de bienvenida a {user_data.email}")
-            await client.post(NOTIFICATIONS_URL, json={
+            await client.post(f"{NOTIFICATIONS_URL}/send", json={
                 "email": user_data.email,
                 "name": user_data.name
             })
