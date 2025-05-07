@@ -7,7 +7,7 @@ import httpx
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+#load_dotenv()
 
 EXTERNAL_REGISTER_URL = os.getenv("EXTERNAL_REGISTER_URL")
 NOTIFICATIONS_URL = os.getenv("NOTIFICATIONS_URL")
