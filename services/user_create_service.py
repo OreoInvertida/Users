@@ -74,6 +74,17 @@ async def create_user_and_notify(user_data: UserCreate):
         except httpx.RequestError as e:
             logger.error(f"Error de conexión con API externa: {e}")
             raise HTTPException(status_code=503, detail="Fallo de conexión con la API externa.")
+        
+        # Notificar por correo al usuario
+        try:
+            logger.info(f"→ Enviando correo de bienvenida a {user_data.email}")
+            await client.post(NOTIFICATIONS_URL, json={
+                "email": user_data.email,
+                "name": user_data.name
+            })
+        except Exception as e:
+            logger.error(f"⛔ Error enviando notificación por correo: {e}")
+            raise HTTPException(status_code=502, detail="No se pudo enviar la notificación de bienvenida.")
 
             
 
