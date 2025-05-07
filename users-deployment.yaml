@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-deployment
+  name: users
 spec:
   replicas: 1
   selector:
@@ -14,9 +14,15 @@ spec:
     spec:
       containers:
         - name: users
-          image: users:latest
+          image: us-south1-docker.pkg.dev/micro-chiller-458819-r4/oreo-repository/users:latest
           ports:
             - containerPort: 8000
           envFrom:
             - configMapRef:
                 name: users-config
+          env:
+            - name : MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: users-secrets
+                  key: MONGO_URI 
