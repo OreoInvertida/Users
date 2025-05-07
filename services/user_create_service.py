@@ -83,7 +83,7 @@ async def create_user_and_notify(user_data: UserCreate):
                 "name": user_data.name
             })
         except Exception as e:
-            logger.error(f"⛔ Error enviando notificación por correo: {e}")
+            logger.error(f"Error enviando notificación por correo: {e}")
             raise HTTPException(status_code=502, detail="No se pudo enviar la notificación de bienvenida.")
 
             
