@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: users-config
 data:
-  EXTERNAL_REGISTER_URL: "https://govcarpeta-apis-4905ff3c005b.herokuapp.com/apis/"
-  NOTIFICATIONS_URL: "http://notifications/notifications/send"
+  EXTERNAL_REGISTER_URL: "https://govcarpeta-apis-4905ff3c005b.herokuapp.com/apis"
+  NOTIFICATIONS_URL: "http://notifications"
   OPERATOR_ID: "65ca0a00d833e984e2608756"
   OPERATOR_NAME: "Operador Ciudadano"
   #MONGO_URI: "mongodb+srv://oreo:negronauta@users.nppj2o.mongodb.net/?retryWrites=true&w=majority&appName=Users"

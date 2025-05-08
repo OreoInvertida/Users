@@ -12,4 +12,4 @@ async def startup_event():
     await connect_to_mongo()
     print("✅ Conexión iniciada.")
 
-app.include_router(create_user_router, tags=["Users"])
+app.include_router(create_user_router, prefix="/users", tags=["Users"])
