@@ -22,7 +22,7 @@ async def create_user_and_notify(user_data: UserCreate):
     collection = mongo.db["users"]
 
     # Verificar si el usuario ya existe
-    existing = await collection.find_one({"id": user_data.id})
+    existing = await collection.find_one({"user_id": user_data.user_id})
     if existing:
         logger.warning("Usuario ya existe en la base de datos")
         raise HTTPException(status_code=409, detail="El usuario ya está registrado en la base de datos local.")
@@ -35,15 +35,6 @@ async def create_user_and_notify(user_data: UserCreate):
     result = await collection.insert_one(user_dict)
     logger.info(f"Usuario creado localmente con ID DB: {result.inserted_id}")
 
-    # Enviar a API externa
-    payload = {
-        "id": user_data.id,
-        "name": user_data.name,
-        "address": user_data.address,
-        "email": user_data.email,
-        "operatorId": OPERATOR_ID,
-        "operatorName": OPERATOR_NAME
-    }
 
     import json
 
@@ -53,7 +44,7 @@ async def create_user_and_notify(user_data: UserCreate):
             
             headers = {"Content-Type": "application/json"}
             payload_clean = {
-                "id": int(user_data.id),
+                "id": int(user_data.user_id),
                 "name": str(user_data.name).strip(),
                 "address": str(user_data.address).strip(),
                 "email": str(user_data.email).strip(),

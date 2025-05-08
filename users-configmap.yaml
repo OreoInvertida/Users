@@ -7,4 +7,6 @@ data:
   NOTIFICATIONS_URL: "http://notifications/notifications/send"
   OPERATOR_ID: "65ca0a00d833e984e2608756"
   OPERATOR_NAME: "Operador Ciudadano"
-  MONGO_URI: "mongodb+srv://oreo:negronauta@users.nppj2o.mongodb.net/?retryWrites=true&w=majority&appName=Users"
+  #MONGO_URI: "mongodb+srv://oreo:negronauta@users.nppj2o.mongodb.net/?retryWrites=true&w=majority&appName=Users"
+  MONGO_URI: "mongodb://localhost:27017"
+  AUTH_DB_NAME: "carpeta_ciudadana"

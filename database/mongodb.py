@@ -2,8 +2,8 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://oreo:negronauta@users.nppj2o.mongodb.net/?retryWrites=true&w=majority&appName=Users")
-DB_NAME = os.getenv("AUTH_DB_NAME", "auth_db")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+DB_NAME = os.getenv("AUTH_DB_NAME", "carpeta_ciudadana")
 
 class MongoDB:
     client = None
