@@ -2,7 +2,7 @@
 from pydantic import BaseModel
 
 class UserCreate(BaseModel):
-    id: int
+    user_id: int
     name: str
     email: str
     address: str
