@@ -6,6 +6,7 @@ from fastapi import HTTPException
 import httpx
 from dotenv import load_dotenv
 import os
+import json
 
 #load_dotenv()
 
@@ -27,6 +28,10 @@ async def create_user_and_notify(user_data: UserCreate):
         logger.warning("Usuario ya existe en la base de datos")
         raise HTTPException(status_code=409, detail="El usuario ya está registrado en la base de datos local.")
 
+    existing_email = await collection.find_one({"email": user_data.email})
+    if existing_email:
+        raise HTTPException(status_code=409, detail="El correo ya está registrado.")
+
     # Guardar localmente
     user_dict = user_data.dict()
     user_dict["type"] = "citizen"
@@ -45,7 +50,7 @@ async def create_user_and_notify(user_data: UserCreate):
         "operatorName": OPERATOR_NAME
     }
 
-    import json
+
 
     async with httpx.AsyncClient() as client:
         try:

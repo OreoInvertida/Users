@@ -11,6 +11,14 @@ async def get_user_by_id(user_id: int):
     user["_id"] = str(user["_id"])
     return user
 
+async def get_user_by_email(user_email: str):
+    collection = mongo.db["users"]
+    user = await collection.find_one({"email": user_email})
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    user["_id"] = str(user["_id"])
+    return user
+
 async def update_user(user_id: int, updates: UserUpdate):
     collection = mongo.db["users"]
     data = {k: v for k, v in updates.dict().items() if v is not None}

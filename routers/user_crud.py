@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends
 from models.user_model import UserCreate, UserUpdate
 from services.user_create_service import create_user_and_notify
-from services.user_rud_service import get_user_by_id, update_user, delete_user
+from services.user_rud_service import get_user_by_id, get_user_by_email, update_user, delete_user
 from services.token_service import verify_token
 
 router = APIRouter()
@@ -14,6 +14,10 @@ async def create_user(user: UserCreate):
 @router.get("/get/{user_id}")
 async def read_user(user_id: int, payload: dict = Depends(verify_token)):
     return await get_user_by_id(user_id)
+
+@router.get("/get-em/{user_email}")
+async def read_user(user_email: str, payload: dict = Depends(verify_token)):
+    return await get_user_by_email(user_email)
 
 @router.put("/update/{user_id}")
 async def modify_user(user_id: int, updates: UserUpdate, payload: dict = Depends(verify_token)):
